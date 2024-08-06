@@ -5,27 +5,27 @@
 
   <style>
 	.cBonbon{
-		color: #D95F59
-		
-	}
-	div.navbar-nav {
-	  --bs-nav-link-color:#b3b3b3;
-	  --bs-nav-link-hover-color:white;
+		color: #FFEBD4
 	}
   </style>
   <title>Site d'élodie</title>
   <link href="style.css" rel="stylesheet" />
+  
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
 	<nav class="navbar fixed-top" style="background-color: #8C3061">
 	  <div class="container-fluid">
-		<a class="navbar-brand cBonbon" href="#">
+		<a class="navbar-brand cBonbon" href="#jouet">
 		  <img src="https://choo-familystore.com/peluche-amuseable-avocat-jellycat.rvgpc4.max.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
 		  Jouet
 		</a>
-				<a class="navbar cBonbon" href="#">
+				<a class="navbar cBonbon" href="#album">
 		  photo album
 		</a>
 				<a class="navbar cBonbon" href="#">
@@ -33,7 +33,7 @@
 		</a>
 	  </div>
 	</nav>
-    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg flex-shrink-0">
+    <div  id=jouet class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg flex-shrink-0">
       <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
 
 	<h1 class="h-100 text-center">Jouet préféré</h1>
@@ -50,7 +50,7 @@
 	
 	
 
-	<h1 class="h-100 text-center">Album photo</h1>
+	<h1 id=album class="h-100 text-center">Album photo</h1>
         <div class="row">
             <a href="https://unsplash.it/1200/768.jpg?image=251" data-toggle="lightbox" data-gallery="example-gallery" class="col-lg-3 col-md-4 col-6 my-3">
                 <img src="https://unsplash.it/600.jpg?image=251" class="img-fluid card">
@@ -72,20 +72,83 @@
             </a>
         </div>
 
+
+
+	<h1 id=courbe class="h-100 text-center">Taille et poids</h1>
+	<div style="width:50%;" class="row">
+			<canvas id="taille" style="width:50%;max-width:700px"></canvas>
+			<canvas id="poids" style="width:50%;max-width:700px"></canvas>
+	</div>
+
+
       </div>
     </div>
 
 
 
-
-
-
-
-
- 
-
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   <script>
+  
+var xyValues = [
+  {x:0, y:3},
+  {x:1, y:3},
+  {x:2, y:4},
+  {x:3, y:5},
+  {x:4, y:6},
+  {x:5, y:7},
+  {x:6, y:8}
+];
+
+const xValues = [0,1,2,3,4,5,6];
+const yValues = [2.9,3.5,4,5,6,7,8];
+
+new Chart("poids", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "rgba(0,0,255,1.0)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+      yAxes: [{ticks: {min: 0, max:8}}],
+    }
+  }
+});
+
+const xTaille = [0,1.4, 1.76, 2, 3, 5];
+
+const yTaille = [48,54,56,57,60,65];
+new Chart("taille", {
+  type: "line",
+  data: {
+    labels: xTaille,
+    datasets: [{
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "rgba(0,0,255,1.0)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yTaille
+    }],
+	        plugins: {
+            title: {
+                display: true,
+                text: 'Taille'
+            }
+        }
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+      yAxes: [{ticks: {min: 40, max:70}}],
+    }
+  }
+});
   </script>
 </body>
 
