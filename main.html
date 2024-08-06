@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8">
 
   <style>
 	.cBonbon{
 		color: #FFEBD4
+	}
+	:target::before {
+		content: '';
+		display: block;
+		height: 100px;
+		margin-top: 0px;
+	}
+	#hShrink {
+	  background-color: #f1f1f1; /* Grey background */
+	  padding: 10px 10px; /* Some padding */
+	  color: black;
+	  text-align: center; /* Centered text */
+	  font-size: 50px; /* Big font size */
+	  font-weight: bold;
+	  position: fixed; /* Fixed position - sit on top of the page */
+	  top: 0;
+	  width: 100%; /* Full width */
+	  transition: 0.2s; /* Add a transition effect (when scrolling - and font size is decreased) */
 	}
   </style>
   <title>Site d'élodie</title>
@@ -19,38 +37,40 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 </head>
 <body>
 
-	<nav class="navbar fixed-top" style="background-color: #8C3061">
+	<nav id=hShrink class="navbar fixed-top " style="background-color: #8C3061">
 	  <div class="container-fluid">
-		<a class="navbar-brand cBonbon" href="#jouet">
+		<a class="navbar cBonbon" href="#jouet">
 		  <img src="https://choo-familystore.com/peluche-amuseable-avocat-jellycat.rvgpc4.max.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-		  Jouet
+		  Jouets
 		</a>
 				<a class="navbar cBonbon" href="#album">
-		  photo album
+		  Album
 		</a>
-				<a class="navbar cBonbon" href="#courbe">
-		  tailles
+				<a class="navbar cBonbon" href="#croissances">
+		  Croissances
 		</a>
 	  </div>
 	</nav>
-    <div  id=jouet class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg flex-shrink-0">
+    <div  class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg flex-shrink-0">
       <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
 
-	<h1 class="h-100 text-center">Jouet préféré</h1>
-	
-	<div class="card" style="width: 18rem;">
-	<div class="card-body" width="30" height="24">
-		<h5 class="card-title">Avocado</h5>
-		<h6 class="card-subtitle mb-2 text-body-secondary"></h6>
-		<p class="card-text">Doudou qui l'acompagne pendant ses nuits</p>
-		<img src="https://choo-familystore.com/peluche-amuseable-avocat-jellycat.rvgpc4.max.jpg" width="200" height="200">
+	<div class="vh-100 vw-60">
+		<h1  id=jouet class=" text-center">Jouet préféré</h1>	
+		<div class="card" style="width: 18rem;">
+			<div class="card-body" width="30" height="24">
+				<h5 class="card-title">Avocado</h5>
+				<h6 class="card-subtitle mb-2 text-body-secondary"></h6>
+				<p class="card-text">Doudou qui l'acompagne pendant ses nuits</p>
+				<img src="https://choo-familystore.com/peluche-amuseable-avocat-jellycat.rvgpc4.max.jpg" width="200" height="200">
 
-	  </div>
+			  </div>
+		</div>
 	</div>
 	
 	
 
-	<h1 id=album class="h-100 text-center">Album photo</h1>
+	<div class="vh-100 vw-60">
+	<h1 id=album class="text-center">Album photo</h1>
         <div class="row">
             <a href="https://unsplash.it/1200/768.jpg?image=251" data-toggle="lightbox" data-gallery="example-gallery" class="col-lg-3 col-md-4 col-6 my-3">
                 <img src="https://unsplash.it/600.jpg?image=251" class="img-fluid card">
@@ -71,10 +91,12 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                 <img src="https://unsplash.it/600.jpg?image=256" class="img-fluid card">
             </a>
         </div>
+        </div>
 
 
 
-	<h1 id=courbe class="h-100 text-center">Taille et poids</h1>
+	<div id=croissances class="vh-100 vw-60">
+	<h1  class="text-center">Taille et poids</h1>
 	<div style="width:50%;" class="row">
 			<canvas id="taille" style="width:50%;max-width:700px"></canvas>
 			<canvas id="poids" style="width:50%;max-width:700px"></canvas>
@@ -83,11 +105,21 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
       </div>
     </div>
-
-
+        </div>
 
   <script>
-  
+  window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    document.getElementById("hShrink").style.fontSize = "30px";
+	document.getElementById("hShrink").style.padding = "5px 10px"; /* Some padding */
+  } else {
+    document.getElementById("hShrink").style.fontSize = "40px";
+  document.getElementById("hShrink").style.padding = "10px 10px"; /* Some padding */
+  }
+} 
+
 var xyValues = [
   {x:0, y:3},
   {x:1, y:3},
@@ -151,7 +183,6 @@ new Chart("taille", {
 });
   </script>
 </body>
-
 	<footer class="footer mt-auto py-3 bg-body-tertiary">
 	  <div class="container">
 		<span class="text-body-secondary">Fait par son papa. 2024</span>
